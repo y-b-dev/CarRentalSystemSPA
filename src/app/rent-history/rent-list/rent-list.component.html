@@ -1,0 +1,6 @@
+<ng-container *ngFor="let rent of rents">
+  <a role="button" style="color: white" (click)="selRent.emit(rent)">
+    {{ rent.StartDate | date }} - {{ rent.EndDate | date }}
+  </a>
+  <hr>
+</ng-container>

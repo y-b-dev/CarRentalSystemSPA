@@ -1,0 +1,53 @@
+<ng-container *ngIf="cars else errMsg">
+  <h4>Search/Filter By:</h4>
+  <div class="row" style="margin: 1em; color: black">
+    <div class="col-xs-6 col-md-2">
+      <select #g (change)="filterGear(g.value)">
+        <option value="">Gear Type</option>
+        <option *ngFor="let gear of gears; let i = index" [value]="gear">{{gear}}</option>
+      </select>
+    </div>
+    <div class="col-xs-6 col-md-2">
+      <select #y (change)="filterYear(y.value)">
+        <option>Year</option>
+        <option *ngFor="let year of years" [value]="year">{{year}}</option>
+      </select>
+    </div>
+    <div class="col-xs-6 col-md-2">
+      <select #man (change)="filterManufactor(man.value)">
+        <option value="">Manufactor</option>
+        <option *ngFor="let m of manufactors" [value]="m">{{m}}</option>
+      </select>
+    </div>
+    <div class="col-xs-6 col-md-2">
+      <select #mod (change)="filterModel(mod.value)">
+        <option value="">Model</option>
+        <option *ngFor="let mod of models" [value]="mod">{{mod}}</option>
+      </select>
+    </div>
+    <div class="col-xs-6 col-md-2">
+      <input type="text" (bsValueChange)="filterDates($event)" [minDate]="bsValue" placeholder="Date availability" class="form-control"
+        bsDaterangepicker>
+    </div>
+    <div class="col-xs-6 col-md-2">
+      <input #search value={{inputVal}} type="text" (keyup)="onSearch(search.value)" class="form-control" placeholder="Free text search...">
+    </div>
+  </div>
+
+  <div class="row" *ngIf="filteredCars as cars">
+    <car-item *ngFor="let car of cars" (goTo)="goToCar($event)" [car]="car"></car-item>
+  </div>
+</ng-container>
+
+<ng-template #errMsg>
+  Something bad happend, please try again later
+</ng-template>
+
+<div class="row" *ngIf="favCars">
+  <hr> Favorite picks:
+  <br>
+  <br>
+  <car-item *ngFor="let car of favCars" (addTo)="addToOrders($event)" (emitCarID)="removeFavCar($event)" (goTo)="goToCar($event)"
+    [car]="car" [fav]="true">
+  </car-item>
+</div>

@@ -1,0 +1,63 @@
+<ng-container *ngIf="!err else errMsg">
+  <div *ngIf="car else noCar" class="row">
+    <div class="thumbnail text-center col-md-8 col-sm-12">
+      <ng-container *ngIf="!isFav else fav">
+        <span role="button" title="Add to favorites" style="color: black; font-size: 2em" class="glyphicon glyphicon-star-empty"
+          (click)="addToFavCars()" aria-hidden="true"></span>
+      </ng-container>
+      <ng-template #fav>
+        <span role="button" title="Remove from favorites" style="color: yellow; font-size: 2em" class="glyphicon glyphicon-star"
+          (click)="removeFavCar()" aria-hidden="true"></span>
+      </ng-template>
+      <img src="{{car.Image}}" alt="Avatar" class="img-responsive">
+      <div class="caption ">
+        <h2>
+          <b>{{car.Manufactor}}</b>
+        </h2>
+        <h4>
+          {{car.Model}}
+        </h4>
+        <p>{{car.Year}}
+          <br> Gear Type: {{gear[car.Gear]}}
+          <br> KM: {{car.KM}}
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <h3>Daily rental price:</h3>
+      {{car.DailyPrice | currency}}
+      <hr>
+      <h3>Price for each extra late day:</h3>
+      {{car.LatePrice | currency}}
+      <hr>
+      <ng-container *ngIf="car.Dates.length else available">
+        <h3 class="red">Car is not available between:</h3>
+        <div style="color: khaki" *ngFor="let dates of car.Dates">
+          {{dates['StartDate'] | date}} - {{dates['EndDate'] | date}}
+        </div>
+        <br>
+      </ng-container>
+      <ng-template #available>
+        <h3 style="color: lawngreen">Car is availalbe!</h3>
+      </ng-template>
+      <button class="btn btn-success" (click)="addToOrders()">Add to orders</button>
+      <ng-container *ngIf="alreadyAddedToOrders">
+        <br>Car has already been added to orders
+      </ng-container>
+      <ng-container *ngIf="isAddedToOrders && !alreadyAddedToOrders">
+        <br>Car has been added to orders!
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+<button style="margin-bottom: 0.5em" class="btn btn-info" (click)="goBack()">Back</button>
+<ng-template #noCar>
+  <h3>
+    Sorry, could not find a result
+  </h3>
+</ng-template>
+<ng-template #errMsg>
+  <h3>
+    {{err}}
+  </h3>
+</ng-template>

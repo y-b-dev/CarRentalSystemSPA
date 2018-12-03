@@ -1,0 +1,15 @@
+<ng-container *ngIf="!err else errMsg">
+  <h2>Users</h2>
+  <hr>
+  <u-list (edit)="onEdit($event)" (makeEmp)="makeEmp($event)" (del)="onDelete($event)" [isUserMode]="true" [users]="users"></u-list>
+  <h2>Employees</h2>
+  <hr>
+  <u-list (del)="onDelete($event)" (edit)="onEdit($event)" (makeUser)="makeUser($event)" [users]="employees"></u-list>
+</ng-container>
+<button style="margin-bottom: 0.5em" class="btn btn-primary" (click)="onAdd()">Add User</button>
+<ng-template #errMsg>
+  <h4>Something went worng, please try again later</h4>
+</ng-template>
+<ng-container *ngIf="errOnAction">
+  <h4>Something went worng, please try again later</h4>
+</ng-container>

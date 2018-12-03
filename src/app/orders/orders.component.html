@@ -1,0 +1,29 @@
+<ng-container *ngIf="!success else submitted">
+  <ng-container *ngIf="cars.length else empty">
+    <order *ngFor="let car of cars; index as i" [car]="car" (dates)="setDates($event, i)" (remove)="remove($event)" (total)="setSum($event, i)"></order>
+    <hr>
+    <div *ngIf="sum.length">
+      Total sum is: {{getSum() | currency}}
+    </div>
+    <div *ngIf="user else notUser">
+      <button style="padding: 1em; margin: 1em" (click)="submitOrder()" [disabled]="!dates.length" class="btn btn-success">Submit order</button>
+    </div>
+    <div *ngIf="err">
+      Sorry, something went wrong, please try again at another time
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #empty>
+  <h3>You have no orders yet!</h3>
+</ng-template>
+<ng-template #notUser>
+  Only users can submit an order, please
+  <a style="color: aqua;" role="button" routerLink="/login">login</a>
+  or
+  <a style="color: aqua;" role="button" routerLink="/signup">sign up</a> if you have'nt already!
+</ng-template>
+<ng-template #submitted>
+  Thank you!
+  <br> Your order has been submitted
+</ng-template>

@@ -1,0 +1,12 @@
+img{
+    max-height: 125%;
+}
+
+.active{
+    font-weight: 900;
+}
+
+a:hover{
+    background-color: rgb(253, 180, 247) !important;
+}
+

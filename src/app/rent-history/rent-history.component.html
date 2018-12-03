@@ -1,0 +1,15 @@
+<ng-container *ngIf="rents?.length && !badErr else noRents">
+  <div class="row">
+    <rent-list [rents]="rents" (selRent)="onSelect($event)" class="col-md-4"></rent-list>
+    <ng-container *ngIf="carErr">
+      Due to an error, partial information will be displayed, please try again
+    </ng-container>
+    <rent-detail *ngIf="showDetail" [rent]="selRent" [car]="car" class="col-md-8"></rent-detail>
+  </div>
+</ng-container>
+<ng-template #noRents>
+  You have no rents yet!
+</ng-template>
+<ng-container *ngIf="badErr">
+  Something bad happended, please try again later later
+</ng-container>

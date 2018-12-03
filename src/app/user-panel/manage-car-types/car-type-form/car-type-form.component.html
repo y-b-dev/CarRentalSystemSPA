@@ -1,0 +1,94 @@
+<ng-container *ngIf="!err else errMsg">
+  <form [formGroup]="form" class="form-horizontal" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="manu">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Manufactor</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" class="form-control" id="manu" aria-describedby="Manufactor" placeholder="For Example: Mercedez" formControlName="Manufactor">
+        <ng-container *ngIf="man.touched">
+          <div class="text-danger" *ngIf="man.errors?.pattern">
+            Invalid value
+          </div>
+          <ng-container *ngIf="man.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="model">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Model</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" class="form-control" id="model" aria-describedby="Model" placeholder="S500" formControlName="Model">
+        <ng-container *ngIf="mod.touched">
+          <div class="text-danger" *ngIf="mod.errors?.pattern">
+            Invalid value
+          </div>
+          <ng-container *ngIf="mod.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="dp">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Daily Price</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" class="form-control" id="dp" aria-describedby="Daily Price" placeholder="For Example: 45.75" formControlName="DailyPrice">
+        <ng-container *ngIf="dp.touched">
+          <div class="text-danger" *ngIf="dp.errors?.pattern">
+            Please type a number/real number
+          </div>
+          <ng-container *ngIf="dp.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="lp">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Late Price</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" class="form-control" id="lp" aria-describedby="Late Price" placeholder="For Example: 88.5" formControlName="LatePrice">
+        <ng-container *ngIf="lp.touched">
+          <div class="text-danger" *ngIf="lp.errors?.pattern">
+            Please type a number/real number
+          </div>
+          <ng-container *ngIf="lp.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="year">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Year</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" class="form-control" id="year" aria-describedby="Year" placeholder="For Example: 2007" formControlName="Year">
+        <ng-container *ngIf="year.touched">
+          <div class="text-danger" *ngIf="year.errors?.min || year.errors?.max || year.errors?.pattern">
+            Please enter a year between {{ maxYear-25 }} and {{ maxYear }}
+          </div>
+          <ng-container *ngIf="year.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <label class="col-sm-2 control-label">
+      <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Gear Type</label>
+    <select style="color: black" formControlName="Gear">
+      <option *ngFor="let g of gears; let i = index" [value]="i">{{g}}</option>
+    </select>
+    <div class="form-group">
+      <div class="col-sm-8 col-lg-7 m-top-sm">
+        <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-lg">Submit</button>
+      </div>
+    </div>
+  </form>
+</ng-container>
+<button style="margin-bottom: 0.5em" class="btn btn-info col-sm-offset-2" (click)="goBack()">Back To Managing Cars</button>
+
+<ng-container *ngIf="success">
+  <h3>{{success}}</h3>
+</ng-container>
+
+<ng-template #errMsg>
+  <h3> {{err}} </h3>
+</ng-template>
+
+<ng-template #reqField>
+  <div class="text-danger">
+    This field is required
+  </div>
+</ng-template>

@@ -1,0 +1,31 @@
+<div class="row text-center" *ngFor="let user of users; let i = index">
+  <div class="col-xs-12 col-sm-pull-1 col-md-pull-2 col-sm-7 col-md-8" style="margin-bottom: 1.5em">
+    <a role="button" style="color: white" (click)="show(i)">
+      {{ user.UserID }} - {{user.LastName}} {{user.FirstName}}
+    </a>
+    <ng-container *ngIf="sel===i">
+      <br>
+      <br> {{user.UserName}}
+      <br> {{user.Email}}
+      <br>
+      <img *ngIf="user.Image" style="max-width: 200px; max-height: 200px" [src]="user.Image" alt="User image">
+    </ng-container>
+  </div>
+  <div class="col-xs-12 col-sm-1 col-md-1 m-bottom-sm">
+    <button type="button" (click)="edit.emit(user.ID)" class="btn btn-info">&nbsp; Edit &nbsp;</button>
+  </div>
+  <div class="col-xs-12 col-sm-1 col-md-1 m-bottom-sm">
+    <button type="button" (click)="del.emit([isUserMode, user.ID, i])" class="btn btn-danger">Delete</button>
+    <br>
+  </div>
+  <ng-container *ngIf="isUserMode else empMode">
+    <div class="col-xs-12 col-sm-3 col-md-2 m-bottom-sm" style="margin-bottom: 1.5em">
+      <button type="button" (click)="makeEmp.emit([user.ID, i])" class="btn btn-warning">Move to Employees</button>
+    </div>
+  </ng-container>
+  <ng-template #empMode>
+    <div class="col-xs-12 col-sm-3 col-md-2" style="margin-bottom: 1.5em">
+      <button type="button" (click)="makeUser.emit([user.ID, i])" class="btn btn-warning">Degrade to User</button>
+    </div>
+  </ng-template>
+</div>

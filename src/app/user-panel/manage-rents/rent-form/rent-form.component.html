@@ -1,0 +1,57 @@
+<ng-container *ngIf="!err else errMsg">
+  <form [formGroup]="form" class="form-horizontal" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="start">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Start Date</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" id="start" placeholder="MM/dd/YYYY" class="form-control" formControlName="StartDate" bsDatepicker [bsValue]="startVal">
+        <ng-container *ngIf="start.touched">
+          <ng-container *ngIf="start.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="end">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> End Date</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" id="end" placeholder="MM/dd/YYYY" class="form-control" formControlName="EndDate" bsDatepicker [bsValue]="endVal">
+        <ng-container *ngIf="end.touched">
+          <ng-container *ngIf="end.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="aed">Actual End Date</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" id="aed" placeholder="MM/dd/YYYY" class="form-control" formControlName="ActualEndDate" bsDatepicker [bsValue]="aedVal">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-8 col-lg-7 m-top-sm">
+        <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-lg">Submit</button>
+      </div>
+    </div>
+  </form>
+</ng-container>
+
+<div *ngIf="form?.errors?.d" class="red">
+  {{ form.errors.d }}
+  <br>
+  <br>
+</div>
+
+<button style="margin-bottom: 0.5em" class="btn btn-info col-sm-offset-2" (click)="goBack()">Back To Managing Rents</button>
+
+<ng-container *ngIf="success">
+  <h3>{{success}}</h3>
+</ng-container>
+
+<ng-template #errMsg>
+  <h3> {{err}} </h3>
+</ng-template>
+
+<ng-template #reqField>
+  <div class="text-danger">
+    This field is required
+  </div>
+</ng-template>

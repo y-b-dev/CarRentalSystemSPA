@@ -1,0 +1,21 @@
+<div class="row" *ngFor="let c of ct; let i = index">
+  <div class="col-xs-6 col-md-10">
+    <a role="button" style="color: white" (click)="show(i)">
+      {{ c.Year }} - {{ c.Manufactor }} {{ c.Model }}
+    </a>
+    <ng-container *ngIf="sel===i">
+      <br>
+      <br> Gear: {{ gear[c.Gear] }}
+      <br> Daily Price: {{ c.DailyPrice }}
+      <br> Late Price: {{ c.LatePrice }}
+      <br>
+    </ng-container>
+    <hr>
+  </div>
+  <div class="col-xs-3 col-md-1">
+    <button type="button" (click)="edit.emit(c.ID)" class="btn btn-info">&nbsp; Edit &nbsp;</button>
+  </div>
+  <div class="col-xs-3 col-md-1">
+    <button type="button" (click)="del.emit([c.ID, i])" class="btn btn-danger">Delete</button>
+  </div>
+</div>

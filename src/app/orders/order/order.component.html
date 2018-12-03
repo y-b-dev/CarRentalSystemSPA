@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-xs-12 col-md-4">
+    {{car.Manufactor}} {{car.Model}} {{car.Year}}
+  </div>
+  <div class="col-xs-12 col-md-4 form-group">
+    <input type="text" (bsValueChange)="setTotal($event)" [minDate]="bsValue" placeholder="Set the rent dates" class="form-control"
+      bsDaterangepicker>
+  </div>
+  <ng-container *ngIf="bsRangeValue">
+    <div class="col-xs-10 col-md-3 ">
+      Total price: {{total | currency}}
+    </div>
+  </ng-container>
+  <span title="Delete order" role="button" (click)="emitRemove.emit(car.ID)" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+</div>
+<ng-container *ngIf="!isValidRange && dateLen">
+  <h4 class="red">
+    The car is scheduled for rent between:
+  </h4>
+  <div style="color: khaki" *ngFor="let dates of car.Dates">
+    {{dates['StartDate'] | date}} - {{dates['EndDate'] | date}}
+  </div>
+</ng-container>

@@ -1,0 +1,42 @@
+<div class="row" *ngFor="let r of rents; let i = index">
+  <div class="col-xs-6 col-md-10">
+    <a role="button" style="color: white" (click)="show(i)">
+      <ng-container *ngIf="r.UserName as uname else noUser">
+        {{ r.LastName }} {{ r.FirstName }}
+        <br> Username: {{ uname }}
+        <br>
+      </ng-container>
+      Start Date: {{ r.StartDate | date }}
+      <br> End Date: {{ r.EndDate | date }}
+    </a>
+    <ng-container *ngIf="sel===i">
+      <br>
+      <br>
+      <ng-container *ngIf="r.ActualEndDate as aed else t">
+        Actual end date: {{ aed | date }}
+      </ng-container>
+      <ng-container *ngIf="r.Image as image">
+        <img style="max-width: 200px; max-height: 200px" [src]="image" alt="Avatar" class="img-responsive">
+      </ng-container>
+      <ng-template #t>
+        Car has not returned yet
+      </ng-template>
+      <br>
+    </ng-container>
+    <hr>
+  </div>
+  <div class="col-xs-3 col-md-1">
+    <button type="button" (click)="edit.emit(r.ID)" class="btn btn-info">&nbsp; Edit &nbsp;</button>
+  </div>
+  <div class="col-xs-3 col-md-1">
+    <button type="button" (click)="del.emit([r.ID, i])" class="btn btn-danger">Delete</button>
+  </div>
+</div>
+
+<ng-template #noUser>
+  <p>No user asociated with this rent</p>
+</ng-template>
+
+<ng-template #noCar>
+  <p>No car asociated with this rent</p>
+</ng-template>

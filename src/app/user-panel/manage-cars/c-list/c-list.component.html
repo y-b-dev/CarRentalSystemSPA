@@ -1,0 +1,19 @@
+<div class="row" *ngFor="let car of cars; let i = index">
+  <div class="col-xs-6 col-md-10">
+    <a role="button" style="color: white" (click)="show(i)">
+      {{ car.CarID }}
+    </a>
+    <ng-container *ngIf="sel===i">
+      <br>
+      <br>
+      <img style="max-width: 200px; max-height: 200px" [src]="car.Image" alt="Car image">
+    </ng-container>
+    <hr>
+  </div>
+  <div class="col-xs-3 col-md-1">
+    <button type="button" (click)="edit.emit(car.ID)" class="btn btn-info">&nbsp; Edit &nbsp;</button>
+  </div>
+  <div class="col-xs-3 col-md-1">
+    <button type="button" (click)="del.emit([car.ID, i])" class="btn btn-danger">Delete</button>
+  </div>
+</div>

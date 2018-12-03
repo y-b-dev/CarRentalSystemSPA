@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-xs-10 col-md-9">
+        <h2>
+            Welcome Back {{suffix}} {{user.LastName}}!
+        </h2>
+    </div>
+    <div *ngIf="user.Image as image" class="col-xs-2 col-md-3">
+        <img style="margin: auto" [src]="image" alt="Avatar" class="img-responsive">
+    </div>
+</div>
+<hr>
+<div class="text-center row m-top-sm">
+    <div class="panel panel-primary bgc">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span class="glyphicon glyphicon-bookmark"></span> Quick Shortcuts</h3>
+        </div>
+        <div class="panel-body row">
+            <a routerLink="/cars" class="col-xs-6 col-md-4 btn btn-info btn-lg" role="button">
+                <span class="glyphicon glyphicon-list"></span>
+                <br/>Our Cars</a>
+
+            <a routerLink="/orders" class="col-xs-6 col-md-4 btn btn-info btn-lg" role="button">
+                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                <br>Orders</a>
+
+            <a routerLink="rent-history" class="col-xs-12 col-md-4 btn btn-info btn-lg" role="button">
+                <span class="glyphicon glyphicon-hourglass"></span>
+                <br/>My Rents History</a>
+        </div>
+        <ng-container *ngIf="user.BranchID">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Employee Zone
+                </h3>
+            </div>
+            <div class="panel-body row">
+                <a routerLink="car-back" class="col-xs-12 btn btn-info btn-lg" role="button">
+                    <span class="glyphicon glyphicon-road"></span>
+                    <br/>Return Car</a>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="user.IsManager">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Manager Zone - Add/Edit/Delete
+                </h3>
+            </div>
+            <div class="panel-body row">
+                <a routerLink="manage-cars" class="col-xs-6 col-md-3 btn btn-info btn-lg" role="button">Cars</a>
+                <a routerLink="manage-users" class="col-xs-6 col-md-3 btn btn-info btn-lg" role="button">Users</a>
+                <a routerLink="manage-rents" class="col-xs-6 col-md-3 btn btn-info btn-lg" role="button">Rents</a>
+                <a routerLink="manage-car-types" class="col-xs-6 col-md-3 btn btn-info btn-lg" role="button">Car Types</a>
+            </div>
+        </ng-container>
+    </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,143 @@
+<ng-container *ngIf="!err else errMsg">
+  <form [formGroup]="form" class="form-horizontal" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="fName">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> First name</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" class="form-control" id="fName" aria-describedby="First name" placeholder="First name" formControlName="FirstName">
+        <ng-container *ngIf="fName.touched">
+          <div class="text-danger" *ngIf="fName.errors?.pattern">
+            First name should be between 2 and 20 letters
+          </div>
+          <ng-container *ngIf="fName.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="lName">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Last name</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" class="form-control" id="lName" aria-describedby="Last name" placeholder="Last name" formControlName="LastName">
+        <ng-container *ngIf="lName.touched">
+          <div class="text-danger " *ngIf="lName.errors?.pattern">
+            Last name should be between 2 and 20 letters
+          </div>
+          <ng-container *ngIf="lName.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="id">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> ID</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" class="form-control" id="id" aria-describedby="ID" placeholder="ID" formControlName="UserID">
+        <ng-container *ngIf="id.touched">
+          <div class="text-danger" *ngIf="id.errors?.pattern">
+            Invalid ID number
+          </div>
+          <ng-container *ngIf="id.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="username">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Username</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" class="form-control" id="username" aria-describedby="Username" placeholder="Username" formControlName="UserName">
+        <ng-container *ngIf="username.touched">
+          <div class="text-danger " *ngIf="username.errors?.pattern">
+            Username should be between 3 to 20 characters,only alphanumerics and underscore are allowed
+          </div>
+          <ng-container *ngIf="username.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="email">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Email</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" class="form-control" id="email" aria-describedby="Email" placeholder="Email" formControlName="Email">
+        <ng-container *ngIf="email.touched">
+          <div class="text-danger " *ngIf="email.errors?.email">
+            Illegal email
+          </div>
+          <ng-container *ngIf="email.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="birth">Birth Date</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" id="birth" placeholder="MM/dd/YYYY" class="form-control" formControlName="BirthDate" bsDatepicker [bsValue]="bsVal">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="img">Image</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="text" id="img" placeholder="Image URL" class="form-control" formControlName="Image">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Gender</label>
+      <div class="col-sm-8 col-lg-7">
+        <label class="radio-inline" for="male">
+          <input type="radio" [checked]="genderVal === 0" id="male" aria-describedby="Male" formControlName="Gender" value="0">Male
+        </label>
+        <label class="radio-inline" for="female">
+          <input type="radio" [checked]="genderVal === 1" id="female" aria-describedby="Female" formControlName="Gender" value="1">Female
+        </label>
+        <label class="radio-inline" for="indeterminate">
+          <input type="radio" [checked]="genderVal === 2" id="indeterminate" aria-describedby="Indeterminate" formControlName="Gender"
+            value="2">Indeterminate
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="password">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Password</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="password" class="form-control" id="password" aria-describedby="Password" placeholder="Password" formControlName="Password">
+        <ng-container *ngIf="password.touched">
+          <div class="text-danger " *ngIf="password.errors?.pattern">
+            Password should be between 6 to 20 characters,only alphanumerics and underscore are allowed
+          </div>
+          <ng-container *ngIf="password.errors?.required; then reqField"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="repassword">
+        <span class="glyphicon red glyphicon-asterisk" aria-hidden="true"></span> Retype password</label>
+      <div class="col-sm-8 col-lg-7">
+        <input type="password" class="form-control" id="repassword" aria-describedby="Retype password" formControlName="repassword">
+        <ng-container *ngIf="repassword.touched">
+          <ng-container *ngIf="repassword.errors?.required; then reqField"></ng-container>
+          <div class="text-danger" *ngIf="form.errors?.mis">
+            Passwords do not match
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-8 col-lg-7 m-top-sm">
+        <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-lg">Submit</button>
+      </div>
+    </div>
+  </form>
+</ng-container>
+<button style="margin-bottom: 0.5em" class="btn btn-info col-sm-offset-2" (click)="goBack()">Back To Managing Users</button>
+
+<ng-container *ngIf="success">
+  <h3>{{success}}</h3>
+</ng-container>
+
+<ng-template #errMsg>
+  <h3> {{err}} </h3>
+</ng-template>
+
+<ng-template #reqField>
+  <div class="text-danger">
+    This field is required
+  </div>
+</ng-template>

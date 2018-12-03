@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+div{
+    min-height: 10.9vh;
+}
+
+h4{
+    padding: 1%;
+}

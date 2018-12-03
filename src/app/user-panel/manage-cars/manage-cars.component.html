@@ -1,0 +1,8 @@
+<c-list *ngIf="!err else errMsg" (edit)="onEdit($event)" (del)="onDelete($event)" [cars]="cars"></c-list>
+<button style="margin-bottom: 0.5em" class="btn btn-primary" (click)="onAdd()">Add Car</button>
+<ng-template #errMsg>
+  <h4>Something went worng, please try again later</h4>
+</ng-template>
+<ng-container *ngIf="errOnAction">
+  <h4>Something went worng, please try again later</h4>
+</ng-container>

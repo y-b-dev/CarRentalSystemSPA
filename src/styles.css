@@ -1,0 +1,37 @@
+body{
+    background-color: rgb(73, 53, 109);
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 175%;
+}
+
+p{
+    padding: 1em;
+}
+
+.m-top-sm{
+    margin-top: 0.5em;
+}
+
+.red{
+    color: red;
+}
+
+.bgc{
+    background-color: rgb(194, 250, 238);
+}
+
+.thumbnail {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 2em;
+}
+
+.thumbnail:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.m-bottom-sm{
+    margin-bottom: 0.5em;
+}
+
+
